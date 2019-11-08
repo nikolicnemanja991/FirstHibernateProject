@@ -1,35 +1,37 @@
 package automobili;
 
-import org.hibernate.Session;
+/*import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Configuration;*/
 
+import controller.HibernateDAO;
 import model.Car;
 
 public class GlavnaHibernateKlasa {
 
 
 	public static void main(String[] args) {
-
-        // SessionFactory - interface
-		// Configuration - class
-		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		
-		Car car = new Car("bugatti", "chiron", 2018, 3.1, false);
+		HibernateDAO dao = new HibernateDAO();
 		
-		Session sesija = factory.openSession();
-		   sesija.beginTransaction();
-		   
-		   try {
-			  sesija.save(car); 
-			  
-			  sesija.getTransaction().commit();
-		   } catch (Exception e) {
-		      sesija.getTransaction().rollback();
-		   }
-		   
-		sesija.close();
-
+		/*
+		 * Car car = new Car("maserati", "levante", 2019, 1.2, true);
+		 * dao.snimiAutoUbazu(car);
+		 */
+		
+		/*
+		 * Car car = dao.vratiAuto(2); System.out.println("Uzeo si auto marke: " +
+		 * car.getMarka() + " model: " + car.getModel() + " cena: " + car.getCena());
+		 */
+		
+		/*
+		 * Car car = dao.vratiAuto(5); dao.updateCarPrice(car.getIdCar(), 1500000);
+		 * System.out.println("Uzeo si auto marke: " + car.getMarka() + " model: " +
+		 * car.getModel() + " cena: " + car.getCena());
+		 */
+		
+		if(dao.deleteCar(4)) System.out.println("Obrisan je auto!");
+		else System.out.println("Nije obrisan je auto!");
 	}
 
 }
