@@ -8,6 +8,7 @@ import controller.HibernateDAO;
 import model.Car;
 import model.User;
 import model.VisitCard;
+import model.VrstaVozila;
 
 public class GlavnaHibernateKlasa {
 
@@ -16,7 +17,7 @@ public class GlavnaHibernateKlasa {
 		
 		HibernateDAO dao = new HibernateDAO();
 		
-        Car car = new Car("land rover", "discovery", 2018, 39990, false);
+        Car car = new Car("land rover", "discovery", 2018, 39990, false, VrstaVozila.SUV);
         
         VisitCard visitCard = new VisitCard();
         visitCard.setIme("ruzica");
