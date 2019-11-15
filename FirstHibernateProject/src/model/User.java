@@ -1,11 +1,15 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,14 +26,16 @@ public class User {
 	private double novcanik;
 	@Embedded
 	private VisitCard visitCard;
-	@OneToOne
-	private Car auto;
+	//     interfejs                    klasa
+	@OneToMany
+	private List<Car> automobili = new ArrayList<Car>();
 	
-	public Car getAuto() {
-		return auto;
+
+	public List<Car> getAutomobili() {
+		return automobili;
 	}
-	public void setAuto(Car auto) {
-		this.auto = auto;
+	public void setAutomobili(List<Car> automobili) {
+		this.automobili = automobili;
 	}
 	public VisitCard getVisitCard() {
 		return visitCard;

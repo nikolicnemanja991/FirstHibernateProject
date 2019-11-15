@@ -114,31 +114,23 @@ public class HibernateDAO {
 		
 	}
 	
-	public void linkujUseraIauto(int idCar, int idUser) {
-		
-		Session sesija = factory.openSession();
-		sesija.beginTransaction();
-		Car car;
-		User user;
-        
-		try {
-			// preuzmi usera i car iz baze
-			car = sesija.get(Car.class, idCar);
-			user = sesija.get(User.class, idUser);
-			// linkuj ih
-			car.setKorisnik(user);
-			user.setAuto(car);
-			// azuriraj u bazu
-			sesija.update(user);
-			sesija.update(car);
-
-		    sesija.getTransaction().commit();
-		} catch (Exception e) {
-		    sesija.getTransaction().rollback();
-	    } finally {
-		    sesija.close();
-		}
-		
-	}
+	/*
+	 * public void linkujUseraIauto(int idCar, int idUser) {
+	 * 
+	 * Session sesija = factory.openSession(); sesija.beginTransaction(); Car car;
+	 * User user;
+	 * 
+	 * try { // preuzmi usera i car iz baze car = sesija.get(Car.class, idCar); user
+	 * = sesija.get(User.class, idUser);
+	 * 
+	 * car.setKorisnik(user); user.setAuto(car);
+	 * 
+	 * sesija.update(user); sesija.update(car);
+	 * 
+	 * sesija.getTransaction().commit(); } catch (Exception e) {
+	 * sesija.getTransaction().rollback(); } finally { sesija.close(); }
+	 * 
+	 * }
+	 */
 	
 }
