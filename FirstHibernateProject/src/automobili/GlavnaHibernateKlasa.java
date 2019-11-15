@@ -17,21 +17,24 @@ public class GlavnaHibernateKlasa {
 		
 		HibernateDAO dao = new HibernateDAO();
 		
-        Car car = new Car("land rover", "discovery", 2018, 39990, false, VrstaVozila.SUV);
-        
-        VisitCard visitCard = new VisitCard();
-        visitCard.setIme("ruzica");
-        visitCard.setEmail("ruza@gmail.com");
-        visitCard.setBrojTelefona("0641234567");
-        
-        User user = new User();
-        user.setUserName("ruza");
-        user.setPassword("programer123");
-        user.setNovcanik(100000);
-        user.setVisitCard(visitCard);
-        
-        dao.snimiAutoUbazu(car);
-        dao.snimiUseraUbazu(user);
+		dao.linkujUseraIauto(1, 1);
+		
+		/*
+		 * Car car = new Car("land rover", "discovery", 2018, 39990, false,
+		 * VrstaVozila.SUV);
+		 * 
+		 * VisitCard visitCard = new VisitCard(); visitCard.setIme("ruzica");
+		 * visitCard.setEmail("ruza@gmail.com");
+		 * visitCard.setBrojTelefona("0641234567");
+		 * 
+		 * User user = new User(); user.setUserName("ruza");
+		 * user.setPassword("programer123"); user.setNovcanik(100000);
+		 * user.setVisitCard(visitCard);
+		 * 
+		 * dao.snimiAutoUbazu(car); dao.snimiUseraUbazu(user);
+		 */
+		
+		
 	}
 
 }

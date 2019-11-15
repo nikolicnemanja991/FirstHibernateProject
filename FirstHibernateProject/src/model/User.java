@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,15 @@ public class User {
 	private double novcanik;
 	@Embedded
 	private VisitCard visitCard;
+	@OneToOne
+	private Car auto;
 	
+	public Car getAuto() {
+		return auto;
+	}
+	public void setAuto(Car auto) {
+		this.auto = auto;
+	}
 	public VisitCard getVisitCard() {
 		return visitCard;
 	}
