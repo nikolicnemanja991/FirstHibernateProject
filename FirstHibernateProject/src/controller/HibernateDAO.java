@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -132,5 +135,102 @@ public class HibernateDAO {
 	 * 
 	 * }
 	 */
+	
+	public User vratiUsera (int id) {
+		Session sesija = factory.openSession();
+		sesija.beginTransaction();
+		
+		User user = null;
+		try {
+		   user = sesija.get(User.class, id);
+		   sesija.getTransaction().commit();
+		   return user;
+		} catch (Exception e) {
+		   sesija.getTransaction().rollback();
+		   return user;
+	    } finally {
+		   sesija.close();
+		}
+		
+	}
+	
+	public boolean daLiUserImaDovoljnoParaZaAutomobil(User user, List <Car> listaAutomobila) {
+		Session sesija = factory.openSession();
+		sesija.beginTransaction();
+		
+		double novcanik = user.getNovcanik();
+		double krajnjaCena = 0;
+		
+		for(Car car: listaAutomobila) {
+			krajnjaCena += car.getCena();
+		}
+		
+		try {
+		   
+			if (novcanik >= krajnjaCena) {
+				System.out.println("Kupili ste automobile");
+				sesija.getTransaction().commit();
+				return true;
+			} else {
+				System.out.println("Nemate dovoljno novca");
+				sesija.getTransaction().commit();
+				return false;
+			}
+		   
+		} catch (Exception e) {
+		   sesija.getTransaction().rollback();
+		   return false;
+	    } finally {
+		   sesija.close();
+		}
+	}
+	
+	public void spojiUseraIcar(User user,  List <Car> listaAutomobila) {
+		Session sesija = factory.openSession();
+		sesija.beginTransaction();
+		// dodaj listu automobila datom korisniku
+		user.setAutomobili(listaAutomobila);
+		double krajnjaCena = 0;
+		for(Car car: listaAutomobila) {
+			krajnjaCena += car.getCena();
+		}
+		// azuriraj novcanik
+		user.setNovcanik(user.getNovcanik() - krajnjaCena);
+		try {
+		   sesija.update(user);
+		   sesija.getTransaction().commit();
+		   System.out.println("Sve OK, balanc azuriran!");
+		} catch (Exception e) {
+		   sesija.getTransaction().rollback();
+		   
+	    } finally {
+		   sesija.close();
+		}
+	}
+	
+	public void izlistajAutomobile(User user){
+		Session sesija = factory.openSession();
+		sesija.beginTransaction();
+		
+		List<Car> automobili = new ArrayList<Car>();
+		
+		try {
+		   
+		   automobili = user.getAutomobili();
+		   int brojAutomobila = automobili.size();
+		   System.out.println("Korisnik " + user.getUserName() + " je kupio " + brojAutomobila + " automobila.");
+		   for(Car car: automobili) {
+			   System.out.println(car.getMarka() + " "+ car.getModel());
+		   }
+		   sesija.getTransaction().commit();
+		   
+		} catch (Exception e) {
+		   sesija.getTransaction().rollback();
+		   e.printStackTrace();
+		   
+	    } finally {
+		   sesija.close();
+		}
+	}
 	
 }

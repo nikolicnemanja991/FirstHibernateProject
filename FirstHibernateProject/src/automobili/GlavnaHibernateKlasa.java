@@ -1,5 +1,8 @@
 package automobili;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;*/
@@ -17,33 +20,26 @@ public class GlavnaHibernateKlasa {
 		
 		HibernateDAO dao = new HibernateDAO();
 		
-		Car car1 = new Car("clysler", "300c" , 2019, 35000, false, VrstaVozila.PUTNICKO);
-		Car car2 = new Car("dodge", "caliber" , 2017, 10000, false, VrstaVozila.PUTNICKO);
-		Car car3 = new Car("lexus", "lc500" , 2019, 11000, false, VrstaVozila.PUTNICKO);
-		Car car4 = new Car("lada", "niva" , 2019, 19000, false, VrstaVozila.TERENAC);
-		
-		dao.snimiAutoUbazu(car1);
-		dao.snimiAutoUbazu(car2);
-		dao.snimiAutoUbazu(car3);
-		dao.snimiAutoUbazu(car3);
-		
-		//dao.linkujUseraIauto(1, 1);
-		
-		/*
-		 * Car car = new Car("land rover", "discovery", 2018, 39990, false,
-		 * VrstaVozila.SUV);
-		 * 
-		 * VisitCard visitCard = new VisitCard(); visitCard.setIme("ruzica");
-		 * visitCard.setEmail("ruza@gmail.com");
-		 * visitCard.setBrojTelefona("0641234567");
-		 * 
-		 * User user = new User(); user.setUserName("ruza");
-		 * user.setPassword("programer123"); user.setNovcanik(100000);
-		 * user.setVisitCard(visitCard);
-		 * 
-		 * dao.snimiAutoUbazu(car); dao.snimiUseraUbazu(user);
-		 */
-		
+        User user = dao.vratiUsera(1);
+        
+        System.out.println("Zdravo " + user.getUserName());
+        
+        Car auto1 = dao.vratiAuto(2);
+        Car auto2 = dao.vratiAuto(3);
+        Car auto3 = dao.vratiAuto(5);
+        
+        List<Car> ruziniAutomobili = new ArrayList<Car>();
+        
+        ruziniAutomobili.add(auto1);
+        ruziniAutomobili.add(auto2);
+        ruziniAutomobili.add(auto3);
+        
+        if(dao.daLiUserImaDovoljnoParaZaAutomobil(user, ruziniAutomobili)) {
+        	
+        	dao.spojiUseraIcar(user, ruziniAutomobili);
+        }
+
+		dao.izlistajAutomobile(user);
 		
 	}
 
