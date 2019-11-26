@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -215,10 +216,14 @@ public class HibernateDAO {
 		List<Car> automobili = new ArrayList<Car>();
 		
 		try {
-			
+			// - - - - - - - - - - - - - - - - - - - - - - -
 			// lazy initialization - rucno preuzimanje liste
+			// - - - - - - - - - - - - - - - - - - - - - - -
 			User u = sesija.get(User.class, user.getIdUser());
-			u.getAutomobili().size(); // povlacimo listu
+			// hakerska varijanta (inicijalizuje samo datu listu)
+			//u.getAutomobili().size(); // povlacimo listu
+			// skolska varijanta (inicijalizuje sve liste)
+			Hibernate.initialize(u); // populise u - izvlaci iz baze a ne iz kesa
 			
 		   
 		   automobili = u.getAutomobili();
