@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,10 +26,11 @@ public class User {
 	private String userName;
 	private String password;
 	private double novcanik;
-	@Embedded
-	private VisitCard visitCard;
+	// lista vizit karti
+	@ElementCollection
+	private List<VisitCard> visitCards = new ArrayList<VisitCard>();
 	//     interfejs                    klasa
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "korisnik")
 	private List<Car> automobili = new ArrayList<Car>();
 	
 
@@ -38,11 +40,12 @@ public class User {
 	public void setAutomobili(List<Car> automobili) {
 		this.automobili = automobili;
 	}
-	public VisitCard getVisitCard() {
-		return visitCard;
+    
+	public List<VisitCard> getVisitCards() {
+		return visitCards;
 	}
-	public void setVisitCard(VisitCard visitCard) {
-		this.visitCard = visitCard;
+	public void setVisitCards(List<VisitCard> visitCards) {
+		this.visitCards = visitCards;
 	}
 	public int getIdUser() {
 		return idUser;
