@@ -192,13 +192,18 @@ public class HibernateDAO {
 		// dodaj listu automobila datom korisniku
 		user.setAutomobili(listaAutomobila);
 		double krajnjaCena = 0;
-		for(Car car: listaAutomobila) {
-			krajnjaCena += car.getCena();
-		}
-		// azuriraj novcanik
-		user.setNovcanik(user.getNovcanik() - krajnjaCena);
+		
+		
 		try {
-		   sesija.update(user);
+			for(Car car: listaAutomobila) {
+				car.setKorisnik(user);
+				sesija.update(car);
+				krajnjaCena += car.getCena();
+			}
+			// azuriraj novcanik
+			user.setNovcanik(user.getNovcanik() - krajnjaCena);
+			
+			sesija.update(user);
 		   sesija.getTransaction().commit();
 		   System.out.println("Sve OK, balanc azuriran!");
 		} catch (Exception e) {
