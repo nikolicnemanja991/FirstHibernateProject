@@ -219,14 +219,15 @@ public class HibernateDAO {
 			// - - - - - - - - - - - - - - - - - - - - - - -
 			// lazy initialization - rucno preuzimanje liste
 			// - - - - - - - - - - - - - - - - - - - - - - -
-			User u = sesija.get(User.class, user.getIdUser());
+			//User u = sesija.get(User.class, user.getIdUser());
 			// hakerska varijanta (inicijalizuje samo datu listu)
 			//u.getAutomobili().size(); // povlacimo listu
 			// skolska varijanta (inicijalizuje sve liste)
-			Hibernate.initialize(u); // populise u - izvlaci iz baze a ne iz kesa
+			//Hibernate.initialize(u); // populise u - izvlaci iz baze a ne iz kesa
 			
 		   
-		   automobili = u.getAutomobili();
+		   //automobili = u.getAutomobili();
+		   automobili = user.getAutomobili();
 		   int brojAutomobila = automobili.size();
 		   System.out.println("Korisnik " + user.getUserName() + " je kupio " + brojAutomobila + " automobila.");
 		   for(Car car: automobili) {
