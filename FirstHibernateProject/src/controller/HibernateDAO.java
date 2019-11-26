@@ -215,8 +215,13 @@ public class HibernateDAO {
 		List<Car> automobili = new ArrayList<Car>();
 		
 		try {
+			
+			// lazy initialization - rucno preuzimanje liste
+			User u = sesija.get(User.class, user.getIdUser());
+			u.getAutomobili().size(); // povlacimo listu
+			
 		   
-		   automobili = user.getAutomobili();
+		   automobili = u.getAutomobili();
 		   int brojAutomobila = automobili.size();
 		   System.out.println("Korisnik " + user.getUserName() + " je kupio " + brojAutomobila + " automobila.");
 		   for(Car car: automobili) {
