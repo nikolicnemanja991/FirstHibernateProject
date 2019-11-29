@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import model.Car;
+import model.Prodavac;
 import model.User;
 
 public class HibernateDAO {
@@ -105,6 +106,24 @@ public class HibernateDAO {
 		   sesija.beginTransaction();
 		   try {
 			  sesija.save(user); 
+			  
+			  sesija.getTransaction().commit();
+			  
+			  return true;
+		   } catch (Exception e) {
+		      sesija.getTransaction().rollback();
+		      return false;
+		   } finally {
+		      sesija.close();
+		   }
+		
+	}
+	
+	public boolean snimiProdavcaUbazu (Prodavac prodavac) {
+		Session sesija = factory.openSession();
+		   sesija.beginTransaction();
+		   try {
+			  sesija.save(prodavac); 
 			  
 			  sesija.getTransaction().commit();
 			  
