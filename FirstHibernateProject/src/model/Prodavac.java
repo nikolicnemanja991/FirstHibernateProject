@@ -4,7 +4,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Sales_manager")
+// Ovo je samo za single table strategy
+//@DiscriminatorValue("Sales_manager")
 public class Prodavac extends User {
 	
 	private int pib;
