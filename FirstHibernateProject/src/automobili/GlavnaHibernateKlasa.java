@@ -22,21 +22,59 @@ public class GlavnaHibernateKlasa {
 		
 		HibernateDAO dao = new HibernateDAO();
 		
+		Car car3 = new Car(); car3.setMarka("Fiat"); car3.setModel("Punto");
+		car3.setGodiste(2005); car3.setCena(3000);
+		car3.setVrstaVozila(VrstaVozila.PUTNICKO); car3.setRegistracija(true);
 		
-		User user = new User();
-		user.setUserName("Pera");
+		Car car4 = new Car(); car4.setMarka("BMW"); car4.setModel("740");
+		car4.setGodiste(2018); car4.setCena(50000);
+		car4.setVrstaVozila(VrstaVozila.PUTNICKO); car4.setRegistracija(true);
 		
-		Prodavac prodavac = new Prodavac();
-		prodavac.setUserName("Elvis");
-		prodavac.setPib(1);
+		dao.snimiAutoUbazu(car3);
+		dao.snimiAutoUbazu(car4);
 		
-		Kupac kupac = new Kupac();
-		kupac.setUserName("Milica");
-		kupac.setJmbg("1234567890123");
 		
-		dao.snimiUseraUbazu(user);
-		dao.snimiUseraUbazu(prodavac);
-		dao.snimiUseraUbazu(kupac);
+		
+		User kupac = dao.vratiUsera(4);
+		Car car1 = dao.vratiAuto(1);
+		Car car2 = dao.vratiAuto(2);
+		
+		car1.setKorisnik(kupac);
+		car2.setKorisnik(kupac);
+		
+		List<Car> automobili = new ArrayList<Car>();
+		
+		dao.spojiUseraIcar(kupac, automobili);
+		automobili.add(car1);
+		automobili.add(car2);
+		
+		/*
+		 * VisitCard vizitKarta = new VisitCard(); vizitKarta.setIme("Sone");
+		 * vizitKarta.setEmail("nenadcvija@gmail.com");
+		 * vizitKarta.setBrojTelefona("0603332211");
+		 * 
+		 * List<VisitCard> kartice = new ArrayList<VisitCard>();
+		 * kartice.add(vizitKarta);
+		 * 
+		 * Kupac kupac = new Kupac(); kupac.setUserName("Nenad");
+		 * kupac.setPassword("nenad123"); kupac.setJmbg("9230567890123");
+		 * kupac.setNovcanik(3000000);
+		 * 
+		 * dao.snimiUseraUbazu(kupac);
+		 * 
+		 * Car car1 = new Car(); car1.setMarka("Fiat"); car1.setModel("Punto");
+		 * car1.setGodiste(2005); car1.setCena(3000);
+		 * car1.setVrstaVozila(VrstaVozila.PUTNICKO); car1.setRegistracija(true);
+		 * 
+		 * Car car2 = new Car(); car2.setMarka("BMW"); car2.setModel("740");
+		 * car2.setGodiste(2018); car2.setCena(50000);
+		 * car2.setVrstaVozila(VrstaVozila.PUTNICKO); car2.setRegistracija(true);
+		 * 
+		 * dao.snimiAutoUbazu(car1);
+		 * dao.snimiAutoUbazu(car2);
+		 */
+		
+		
 		
 
 		

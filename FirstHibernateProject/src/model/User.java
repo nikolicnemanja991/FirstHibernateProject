@@ -21,11 +21,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="korisnik")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE) // samo kod TABLE_PER_CLASS
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // samo kod TABLE_PER_CLASS
 	private int idUser;
 	@Column(name="user_name")
 	private String userName;
